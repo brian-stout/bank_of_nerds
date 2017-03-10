@@ -7,6 +7,10 @@ class Account():
         self._accountType = "Default"
 
     @property
+    def accountName(self):
+        return self._accountName
+
+    @property
     def accountType(self):
         return self._accountType
 

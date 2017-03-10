@@ -18,10 +18,42 @@ def print_bank_menu():
     print("F: View all bank accounts")
     print("Q: Quit the program")
 
-def print_account_menu():
+def print_account_menu(account):
+    print("Account Name:" + account.accountName)
+    print("Type: " + account.accountType)
+    print("Account ID: " + str(account.actID)
+    print("Balance: " + str(account.moneyInAccount)
+
     print("A: Deposit money to account")
     print("B: Withdraw money from account")
     print("C: Transfer money to another account")
+
+def access_accounts(bank, customer, account):
+    print_account_menu(account)
+
+    switch = input("Please select an option ")
+
+    if switch.upper() == "A":
+        while True:
+            print("How much money would you like to deposit? (Q to back out)")
+            deposit = input("deposit: ")
+            if deposit == "" or "Q" or "q":
+                break
+            elif deposit.isdigit():
+                account.deposit(deposit)
+            else:
+                print("Please enter a valid input")
+    elif switch.upper() == "B":
+        while True:
+            print("How much money would you like to withdraw? (Q to back out)")
+            withdrawal = input("withdrawal: ")
+            if withdrawal == "" or "Q" or "q":
+                break
+            elif withdrawal.isdigit():
+                account.withdraw(withdrawal)
+            else:
+                print("Please enter a valid input")
+
 
 def create_customer(bank):
 
