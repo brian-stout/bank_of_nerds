@@ -1,5 +1,6 @@
 #!usr/bin/env python3
 
+from account import Account
 from customer import Customer
 from accounts.savings import Savings
 from accounts.checkings import Checkings
