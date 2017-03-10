@@ -24,6 +24,9 @@ class Customer():
 
     def print_accounts(self):
         for account in self.accounts:
-            print(account)
+            loopCount = 1
+            print(str(loopCount) + ". " + str(account))
+            loopCount += 1
+
 
 if __name__ == '__main__': pass

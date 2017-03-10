@@ -52,7 +52,7 @@ def create_account(bank, actType, name):
     return bank.accountLookup[actID]
 
 #TODO: Add default option for key not found (Also empty dictionary)
-def option_c(bank):
+def view_customer_data(bank):
     userID = input("Please enter the user's ID number: ")
     userID = int(userID)
 
@@ -60,16 +60,38 @@ def option_c(bank):
     customer = bank.customer_lookup(userID)
     print(customer)
 
-def option_d(bank):
+def access_user_accounts(bank):
     userID = input("Please enter the user's ID number: ")
     customer = bank.customer_lookup(int(userID))
     
     print("All of the user's accounts")
-    if customer.print_accounts():
-        customer.print_accounts()
+    customer.print_accounts()
 
+    print("Input a number to access an account")
+    print("A. Create a new account")
+    print("Q. Main menu")
 
-    
+    while True:
+        switch = input("Choose an option: ")
+
+        if switch.isdigit():
+            UserAccount = customer.accounts[int(switch) - 1]
+            print(UserAccount)
+
+            break
+
+        elif switch.upper() == "A":
+            print("
+
+            break
+
+        elif switch.upper() == "Q":
+
+            break
+
+        else:
+            print("Not a valid option")
+
 
 def option_e():
     print("Option E")
@@ -90,9 +112,9 @@ def main():
             elif switch.upper() == "B":
                 nerdBank.view_customers()
             elif switch.upper() == "C":
-                option_c(nerdBank)
+                view_customer_data(nerdBank)
             elif switch.upper() == "D":
-                option_d(nerdBank)
+                access_user_accounts(nerdBank)
             elif switch.upper() == "E":
                 option_e()
             elif switch.upper() == "F":
