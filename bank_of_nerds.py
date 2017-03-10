@@ -18,11 +18,10 @@ def print_bank_menu():
     print("F: View all bank accounts")
     print("Q: Quit the program")
 
-def print_customer_menu():
-    print("A: View account balance")
-    print("B: Deposit money to account")
-    print("C: Withdraw money from account")
-    print("D: Create a new account")
+def print_account_menu():
+    print("A: Deposit money to account")
+    print("B: Withdraw money from account")
+    print("C: Transfer money to another account")
 
 def create_customer(bank):
 
@@ -75,9 +74,8 @@ def access_user_accounts(bank):
         switch = input("Choose an option: ")
 
         if switch.isdigit():
-            UserAccount = customer.accounts[int(switch) - 1]
-            print(UserAccount)
-
+            userAccount = customer.accounts[int(switch) - 1]
+            access_accounts(bank, customer, userAccount)
             break
 
         elif switch.upper() == "A":
