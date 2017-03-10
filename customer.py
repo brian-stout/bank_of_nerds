@@ -15,4 +15,7 @@ class Customer():
         self._savingAccount = list()
         self._retirementAccount = list()
 
+    def __str__(self):
+        return self._firstName + " " + self._lastName + " ID: " + str(self._userID)
+
 if __name__ == '__main__': pass
