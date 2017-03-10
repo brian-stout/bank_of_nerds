@@ -15,10 +15,13 @@ def print_menu():
     print("Q: Quit the program")
 
 def option_a():
-    print("Option A")
+    firstName = input("Please enter your first name: ")
+    lastName = input("Pleaase enter your last name: ")
+
+    Customer(firstName, lastName)
 
 def option_b():
-    print("Option B")
+    print(Customer.customerLookup)
 
 def option_c():
     print("Option C")
@@ -36,7 +39,7 @@ def main():
         print_menu()
 
         while True:
-            switch = input("Select a menu option: ")
+            switch = input("\nSelect a menu option: ")
 
             if switch.upper() == "A":
                 option_a()
