@@ -1,12 +1,15 @@
 #!usr/bin/env python3
 
-from account import Account
+
+#TODO: Make a bank teller class to see all the customers and accounts in
+from bank import Bank
 from customer import Customer
+
 from accounts.savings import Savings
 from accounts.checkings import Checkings
 from accounts.retirement import Retirement
 
-def print_menu():
+def print_bank_menu():
     print("A: Create customer")
     print("B: View all customers")
     print("C: View customer data by userID")
@@ -15,47 +18,81 @@ def print_menu():
     print("F: View all bank accounts")
     print("Q: Quit the program")
 
-def create_customer():
+def print_customer_menu():
+    print("A: View account balance")
+    print("B: Deposit money to account")
+    print("C: Withdraw money from account")
+    print("D: Create a new account")
+
+def create_customer(bank):
+
     firstName = input("Please enter your first name: ")
     lastName = input("Pleaase enter your last name: ")
 
-    Customer(firstName, lastName)
+    newCustomer = Customer(firstName, lastName, bank.numberOfCustomerIDs)
 
-#TODO: Check for empty dictionaries
-def view_all_customers():
-    for customer in Customer.customerLookup:
-        print(Customer.customerLookup[customer])
+    #By default the bank creates a checkings and savings account
+    newCustomer.accounts.append(create_account(bank, "Checkings", "Checkings Act"))
+    newCustomer.accounts.append(create_account(bank, "Savings", "Savings Act")) 
+
+    bank.add_customer(newCustomer)
+
+def create_account(bank, actType, name):
+    actID = bank.numberOfAccounts
+
+    if actType == "Checkings":
+        newAccount = Checkings(name, actID)
+    elif actType == "Savings":
+        newAccount = Savings(name, actID)
+    elif actType == "Retirement":
+        newAccount = Retirement(name, actID)
+
+    bank.add_account(newAccount)
+
+    return bank.accountLookup[actID]
 
 #TODO: Add default option for key not found (Also empty dictionary)
-def option_c():
+def option_c(bank):
     userID = input("Please enter the user's ID number: ")
+    userID = int(userID)
 
     #TODO: Will include all accounts later
-    print(Customer.customerLookup[int(userID)])
+    customer = bank.customer_lookup(userID)
+    print(customer)
 
-def option_d():
-    print("Option D")
+def option_d(bank):
+    userID = input("Please enter the user's ID number: ")
+    customer = bank.customer_lookup(int(userID))
+    
+    print("All of the user's accounts")
+    if customer.print_accounts():
+        customer.print_accounts()
+
+
+    
 
 def option_e():
     print("Option E")
 
 def main():
+    nerdBank = Bank()
+
     quit = False
 
     while(quit == False):
-        print_menu()
+        print_bank_menu()
 
         while True:
             switch = input("\nSelect a menu option: ")
 
             if switch.upper() == "A":
-                create_customer()
+                create_customer(nerdBank)
             elif switch.upper() == "B":
-                view_all_customers()
+                nerdBank.view_customers()
             elif switch.upper() == "C":
-                option_c()
+                option_c(nerdBank)
             elif switch.upper() == "D":
-                option_d()
+                option_d(nerdBank)
             elif switch.upper() == "E":
                 option_e()
             elif switch.upper() == "F":
