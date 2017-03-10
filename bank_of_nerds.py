@@ -50,6 +50,8 @@ def main():
             elif switch.upper() == "Q":
                 quit = True
                 break
+            else:
+                print("Please choose a valid menu option!")
 
 
 if __name__ == '__main__':
