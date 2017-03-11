@@ -1,5 +1,12 @@
 from accounts.account import Account
 
+"""
+    The checkings account handles most of the base logic for the most
+        basic of bank accounts.  Doesn't do anything special compared
+        to the retirement account or savings account (if interested was
+        being handled)
+"""
+
 
 class Checkings(Account):
 

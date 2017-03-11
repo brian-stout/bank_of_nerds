@@ -1,5 +1,16 @@
 from accounts.account import Account
 
+"""
+    Savings account class is used to created
+        account objects specifically for saving
+        in the bank
+
+    The only difference between a checkings account
+        and a savings account is it keeps track of an
+        interest, which is ultimately useless for this
+        program
+"""
+
 
 class Savings(Account):
 
