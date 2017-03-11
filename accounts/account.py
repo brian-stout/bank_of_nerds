@@ -39,8 +39,11 @@ class Account():
             print("Error: Can not withdraw negative funds")
 
     def __str__(self):
-        return "\"" + self._accountName + "\" (" + self.accountType + ") Account ID: " + str(self._actID)
-    
-        
+        string = "\"" + self._accountName
+        string = string + "\" (" + self.accountType + ") Account ID: "
+        string = string + str(self._actID)
+        return string
 
-if __name__ == '__main__': pass
+
+if __name__ == '__main__':
+    pass

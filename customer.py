@@ -1,5 +1,6 @@
 from accounts.account import Account
 
+
 class Customer():
     def __init__(self, firstName, lastName, age, userID):
         self._firstName = firstName
@@ -34,4 +35,5 @@ class Customer():
             loopCount += 1
 
 
-if __name__ == '__main__': pass
+if __name__ == '__main__':
+    pass

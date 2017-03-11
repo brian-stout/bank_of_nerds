@@ -1,5 +1,6 @@
 from accounts.account import Account
 
+
 class Retirement(Account):
 
     def __init__(self, name, actID):
@@ -11,6 +12,7 @@ class Retirement(Account):
             super().withdraw(money, customer)
         else:
             print("User too old to access retirement account!")
-        
 
-if __name__ == '__main__': pass
+
+if __name__ == '__main__':
+    pass
