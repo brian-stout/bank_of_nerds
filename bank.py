@@ -34,15 +34,15 @@ class Bank():
     def accountLookup(self):
         return self._accountLookup
 
-    #Adds the customer to the bank's look up table for easy access
+    # Adds the customer to the bank's look up table for easy access
     def add_customer(self, newCustomer):
         self._customerLookup[newCustomer.userID] = newCustomer
-        self._numberOfCustomerIDs += 1 # Increase customer account
+        self._numberOfCustomerIDs += 1  # Increase customer account
 
-    #Adds the account to the bank's look up table for easy access
+    # Adds the account to the bank's look up table for easy access
     def add_account(self, newAccount):
         self._accountLookup[newAccount.actID] = newAccount
-        self._numberOfAccounts += 1 #Increase customer account
+        self._numberOfAccounts += 1  # Increase customer account
 
     # A method that can be invoked to print all the customers in
     # bank.  Used for menu option B
