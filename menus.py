@@ -1,3 +1,5 @@
+# This module contains all the functions which handle menu logic
+# and user input
 
 from bank import Bank
 from customer import Customer
@@ -6,14 +8,21 @@ from accounts.savings import Savings
 from accounts.checkings import Checkings
 from accounts.retirement import Retirement
 
+"""
+    The main menu that shows when the program first starts
+"""
+
 
 def print_bank_menu():
-    print()
-    print("A: Create customer")
+    print("\nA: Create customer")
     print("B: View all customers")
     print("C: View customer data by userID")
     print("D: Access customer accounts by userID")
     print("Q: Quit the program")
+
+"""
+    This menu apppears when user selects an account in option D
+"""
 
 
 def print_account_menu(account):
@@ -25,6 +34,11 @@ def print_account_menu(account):
     print("\nA: Deposit money to account")
     print("B: Withdraw money from account")
     print("Q: Main Menu\n")
+
+"""
+    This function handles the logic used to withdraw, deposit money after
+        a user has selected a bank account from option D in the main menu
+"""
 
 
 def access_accounts(bank, customer, account):
@@ -63,6 +77,11 @@ def access_accounts(bank, customer, account):
         else:
             print("Please enter a valid input")
 
+"""
+    Function is called when the user select option A, and grabs user input
+        to create a new customer object and add it to the bank
+"""
+
 
 def create_customer(bank):
 
@@ -84,6 +103,14 @@ def create_customer(bank):
 
     bank.add_customer(customer)
 
+"""
+    The create_account() function makes a new account based on a
+        arbitrary name and the account type.
+
+    By default it's called upon customer creation, but can also be used
+        to create new accounts.
+"""
+
 
 def create_account(bank, actType, name):
     actID = bank.numberOfAccounts
@@ -99,6 +126,12 @@ def create_account(bank, actType, name):
 
     return bank.accountLookup.get(actID)
 
+"""
+    The view_customer_data() function is called upon option C in the main menu.
+        Based on an inputted user ID, it pulls up the First and
+        Last name of a user
+"""
+
 
 def view_customer_data(bank):
     userID = input("Please enter the user's ID number: ")
@@ -109,6 +142,12 @@ def view_customer_data(bank):
         print(customer)
     else:
         print("UserID does not exist")
+
+"""
+    When the user selects the option to create a new account when he views
+        a user's accounts based on the ID,  this menu guides the user
+        through the account creation process.
+"""
 
 
 def create_account_menu(bank, customer):
@@ -138,6 +177,15 @@ def create_account_menu(bank, customer):
 
     newAccount = create_account(bank, actType, name)
     customer.add_account(newAccount)
+
+"""
+    The access_user_accounts() function is ran when the user
+        selects option D in the main menu.  It prompts the user
+        to enter a UserID, then shows all the user's accounts.
+
+    The user then has the option to enter the accounts, or create
+        a new account.
+"""
 
 
 def access_user_accounts(bank):
