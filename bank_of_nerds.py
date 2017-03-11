@@ -5,13 +5,20 @@ from bank import Bank
 
 
 def main():
+    # Creates the bank
     nerdBank = Bank()
 
     quit = False
 
+    # Only quits when user selects Q as the menu option
     while(quit is False):
+        # A is to create new customer
+        # B is to view all customers
+        # C is to view the customer's data via ID
+        # D is to access the customer's accounts via user ID, then menu options
         print_bank_menu()
 
+        # Break after each options beside, default to print menu again
         while True:
             switch = input("\nSelect a menu option: ")
 
@@ -31,6 +38,8 @@ def main():
                 quit = True
                 break
             else:
+                # If all the conditionals failed
+                # the user failed to provide good input
                 print("Please choose a valid menu option!")
 
 if __name__ == '__main__':

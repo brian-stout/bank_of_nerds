@@ -1,6 +1,16 @@
 from customer import Customer
 
 
+"""
+Class handles organizing all the information for the bank
+    Uses dictionaries to allow the program to look up any customer
+    or account via their ID
+    Customer's have seperate IDs from accounts but all accounts
+    share ideas regardless
+    of their type
+"""
+
+
 class Bank():
     def __init__(self):
         self._accountLookup = dict()
