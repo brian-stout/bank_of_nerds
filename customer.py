@@ -23,8 +23,8 @@ class Customer():
         self._accounts.append(account)
 
     def print_accounts(self):
+        loopCount = 1
         for account in self.accounts:
-            loopCount = 1
             print(str(loopCount) + ". " + str(account))
             loopCount += 1
 

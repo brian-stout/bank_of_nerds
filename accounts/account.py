@@ -18,6 +18,10 @@ class Account():
     def actID(self):
         return self._actID
 
+    @property
+    def moneyInAccount(self):
+        return self._moneyInAccount
+
     def deposit(self, money):
         if money > 0:
             self._moneyInAccount += money
@@ -26,7 +30,7 @@ class Account():
 
     def withdraw(self, money):
         if money > 0:
-            if moneyInAccount > money:
+            if self.moneyInAccount > money:
                 self._moneyInAccount -= money
             else:
                 print("Overdraft detected!  There will be a 35$ Fee!")
