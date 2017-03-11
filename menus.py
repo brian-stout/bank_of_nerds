@@ -46,6 +46,7 @@ def access_accounts(bank, customer, account):
 
     while True:
         switch = input("Please select an option ")
+        # Option A to deposit money
         if switch.upper() == "A":
             while True:
                 print("How much money would you like to deposit?", end=' ')
@@ -53,12 +54,16 @@ def access_accounts(bank, customer, account):
                 amount = input("deposit: ")
                 if amount.upper() == "Q":
                     break
+                # Checks to make sure input is a valid number
                 elif amount.isdigit():
+                    # Calls on the deposit method to store money in object
                     account.deposit(int(amount))
                     break
+                # User didn't make valid input since no options worked
                 else:
                     print("Please enter a valid input")
             break
+        # Option B to withdraw money
         elif switch.upper() == "B":
             while True:
                 print("How much money would you like to withdraw?", end=' ')
@@ -66,14 +71,19 @@ def access_accounts(bank, customer, account):
                 amount = input("withdrawal: ")
                 if amount.upper() == "Q":
                     break
+                # Makes sure input was a valid number
                 elif amount.isdigit():
+                    # Customer is passed because of age restrictions
+                    # on the retirement account
                     account.withdraw(int(amount), customer)
                     break
                 else:
                     print("Please enter a valid input")
             break
+        # User wants to quit
         elif switch.upper() == "Q":
             break
+        # User gave bogus input so loop starts again
         else:
             print("Please enter a valid input")
 
@@ -95,12 +105,19 @@ def create_customer(bank):
             print("Not a valid age!")
 
     userAge = int(userAge)
+    # Creates a customer object here
     customer = Customer(firstName, lastName, userAge, bank.numberOfCustomerIDs)
 
     # By default the bank creates a checkings and savings account
-    customer.accounts.append(create_account(bank, "Checkings", "Checkings Act"))
-    customer.accounts.append(create_account(bank, "Savings", "Savings Act"))
+    checkingsAccount = create_account(bank, "Checkings", "Checkings Act")
+    # Adding the account to the customer's list of accounts
+    customer.accounts.append(checkingsAccount)
 
+    savingsAccount = create_account(bank, "Savings", "Savings Act")
+    # Adding the account to the customer's list of accounts
+    customer.accounts.append(savingsAccount)
+
+    # Adding the customer to the bank so we can keep track of him
     bank.add_customer(customer)
 
 """
@@ -113,8 +130,11 @@ def create_customer(bank):
 
 
 def create_account(bank, actType, name):
+    # Grabs the next unique number available in the bank
     actID = bank.numberOfAccounts
 
+    # Logic for which type of account to make
+    # All three classes are unique and inherit the account class
     if actType == "Checkings":
         newAccount = Checkings(name, actID)
     elif actType == "Savings":
@@ -122,8 +142,12 @@ def create_account(bank, actType, name):
     elif actType == "Retirement":
         newAccount = Retirement(name, actID)
 
+    # Adding the account to the bank so we can keep track of it
+    # Also adds a number to the number of accounts so more unique
+    # Ids can be made
     bank.add_account(newAccount)
 
+    # Returns the newly created account from the bank tracker
     return bank.accountLookup.get(actID)
 
 """
@@ -156,6 +180,8 @@ def create_account_menu(bank, customer):
     print("C. For a retirement account")
     print("Q. Main Menu")
 
+    # Simple logic that walks the users through
+    # picking which account he's going to create
     while True:
         switch = input("Choose an options: ")
 
@@ -195,6 +221,8 @@ def access_user_accounts(bank):
         print("User ID does not exist")
         return None
 
+    # Prints out a list of all the accounts the user has
+    # and assigns them a number 1 - whatever
     print("\nAll of the user's accounts")
     customer.print_accounts()
 
@@ -205,7 +233,10 @@ def access_user_accounts(bank):
     while True:
         switch = input("Choose an option: ")
 
+        # A user can input a number to select an account
+        # or a letter to leave the menu or create a new account
         if switch.isdigit():
+            # Try, except block to avoid out of index errors
             try:
                 userAccount = customer.accounts[int(switch) - 1]
             except IndexError:
