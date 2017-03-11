@@ -1,5 +1,12 @@
 from accounts.account import Account
 
+"""
+    Class is an account child class specifically for handling
+        retirement accounts.  The only difference between the
+        main account class and this, is the age restriction
+        on withdrawing   
+"""
+
 
 class Retirement(Account):
 

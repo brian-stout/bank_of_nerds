@@ -1,3 +1,11 @@
+"""
+    The Account class handles the basic data for withdrawing
+        and depositing to accounts, and used by retirement,
+        checkings, and savings classes for most of their basic
+        logic.
+"""
+
+
 class Account():
 
     def __init__(self, name, actID):
@@ -23,13 +31,19 @@ class Account():
         return self._moneyInAccount
 
     def deposit(self, money):
+        # Checking to avoid negative funds being added
         if money > 0:
             self._moneyInAccount += money
         else:
             print("Error:  Can not add negative funds")
 
     def withdraw(self, money, customer):
+        # Checking to avoid negative funds from being added
         if money > 0:
+            # Checks to see if withdrawing the money will
+            # put the user in debt, and if it does
+            # put them in debt and let them know they
+            # triggered an over draft
             if self.moneyInAccount > money:
                 self._moneyInAccount -= money
             else:
