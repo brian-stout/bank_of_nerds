@@ -1,5 +1,6 @@
 from customer import Customer
 
+
 class Bank():
     def __init__(self):
         self._accountLookup = dict()
@@ -31,16 +32,16 @@ class Bank():
         self._accountLookup[newAccount.actID] = newAccount
         self._numberOfAccounts += 1
 
-    #TODO: Check for empty dictionaries
     def view_customers(self):
         if self.customerLookup:
             for customer in self.customerLookup:
                 print(self.customerLookup[customer])
         else:
-            print("There are no customers")  
+            print("There are no customers")
 
     def customer_lookup(self, userID):
         return self._customerLookup.get(userID)
-        
-        
-if __name__ == '__main__': pass
+
+
+if __name__ == '__main__':
+    pass
