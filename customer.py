@@ -1,10 +1,11 @@
 from accounts.account import Account
 
 class Customer():
-    def __init__(self, firstName, lastName, userID):
+    def __init__(self, firstName, lastName, age, userID):
         self._firstName = firstName
         self._lastName = lastName
         self._userID = userID
+        self._userAge = age
 
         self._accounts = list()
 
@@ -15,6 +16,10 @@ class Customer():
     @property
     def accounts(self):
         return self._accounts
+
+    @property
+    def userAge(self):
+        return self._userAge
 
     def __str__(self):
         return self._firstName + " " + self._lastName + " ID: " + str(self._userID)

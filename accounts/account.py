@@ -28,7 +28,7 @@ class Account():
         else:
             print("Error:  Can not add negative funds")
 
-    def withdraw(self, money):
+    def withdraw(self, money, customer):
         if money > 0:
             if self.moneyInAccount > money:
                 self._moneyInAccount -= money

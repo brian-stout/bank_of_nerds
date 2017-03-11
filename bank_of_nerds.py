@@ -10,6 +10,7 @@ from accounts.checkings import Checkings
 from accounts.retirement import Retirement
 
 def print_bank_menu():
+    print()
     print("A: Create customer")
     print("B: View all customers")
     print("C: View customer data by userID")
@@ -20,10 +21,11 @@ def print_account_menu(account):
     print("Account Name:" + account.accountName)
     print("Type: " + account.accountType)
     print("Account ID: " + str(account.actID))
-    print("Balance: " + str(account.moneyInAccount))
+    print("Balance: " + str(account.moneyInAccount) + "$")
 
-    print("A: Deposit money to account")
+    print("\nA: Deposit money to account")
     print("B: Withdraw money from account")
+    print("Q: Main Menu\n")
     #TODO: Transfer money?
 
 def access_accounts(bank, customer, account):
@@ -50,7 +52,7 @@ def access_accounts(bank, customer, account):
                 if amount.upper() == "Q":
                     break
                 elif amount.isdigit():
-                    account.withdraw(int(amount))
+                    account.withdraw(int(amount), customer)
                     break
                 else:
                     print("Please enter a valid input")
@@ -66,8 +68,14 @@ def create_customer(bank):
 
     firstName = input("Please enter your first name: ")
     lastName = input("Pleaase enter your last name: ")
+    while True:
+        userAge = input("Please enter you age: ")
+        if userAge.isdigit():
+            break
+        else:
+            print("Not a valid age!")
 
-    newCustomer = Customer(firstName, lastName, bank.numberOfCustomerIDs)
+    newCustomer = Customer(firstName, lastName, int(userAge), bank.numberOfCustomerIDs)
 
     #By default the bank creates a checkings and savings account
     newCustomer.accounts.append(create_account(bank, "Checkings", "Checkings Act"))
@@ -87,7 +95,7 @@ def create_account(bank, actType, name):
 
     bank.add_account(newAccount)
 
-    return bank.accountLookup[actID]
+    return bank.accountLookup.get(actID)
 
 #TODO: Add default option for key not found (Also empty dictionary)
 def view_customer_data(bank):
@@ -96,7 +104,10 @@ def view_customer_data(bank):
 
     #TODO: Will include all accounts later
     customer = bank.customer_lookup(userID)
-    print(customer)
+    if customer:
+        print(customer)
+    else:
+        print("UserID does not exist")
 
 def create_account_menu(bank, customer):
     print("A. For a checkings account")
@@ -129,11 +140,14 @@ def create_account_menu(bank, customer):
 def access_user_accounts(bank):
     userID = input("Please enter the user's ID number: ")
     customer = bank.customer_lookup(int(userID))
+    if customer == None:
+        print("User ID does not exist")
+        return None
     
-    print("All of the user's accounts")
+    print("\nAll of the user's accounts")
     customer.print_accounts()
 
-    print("Input a number to access an account")
+    print("\nInput a number to access an account")
     print("A. Create a new account")
     print("Q. Main menu")
 
@@ -141,7 +155,11 @@ def access_user_accounts(bank):
         switch = input("Choose an option: ")
 
         if switch.isdigit():
-            userAccount = customer.accounts[int(switch) - 1]
+            try:
+                userAccount = customer.accounts[int(switch) - 1]
+            except IndexError:
+                print("Not a valid option")
+                continue
             access_accounts(bank, customer, userAccount)
             break
 

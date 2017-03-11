@@ -33,11 +33,14 @@ class Bank():
 
     #TODO: Check for empty dictionaries
     def view_customers(self):
-        for customer in self.customerLookup:
-            print(self.customerLookup[customer])     
+        if self.customerLookup:
+            for customer in self.customerLookup:
+                print(self.customerLookup[customer])
+        else:
+            print("There are no customers")  
 
     def customer_lookup(self, userID):
-        return self._customerLookup[userID]
+        return self._customerLookup.get(userID)
         
         
 if __name__ == '__main__': pass
